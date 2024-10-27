@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Example</title>
+    <style>
+        .tooltip {
+            display: none;
+            position: absolute;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 10;
+        }
+		.highlight {
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.5); /* Red with transparency */
+            border: 2px solid rgba(255, 0, 0, 1); /* Solid red border */
+            pointer-events: none; /* Makes sure mouse events go through to the <area> */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interactive Image Example</h1>
+
+<div style="position: relative;">
+    <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
+    
+    <div id="tooltip1" class="tooltip">Text for Area 1</div>
+    <div id="tooltip2" class="tooltip">Text for Area 2</div>
+	
+	<div class="highlight" style="top: 141px; left: 149px; width: 94px; height: 94px;"></div> <!-- Area 1 -->
+    <div class="highlight" style="top: 169px; left: 378px; width: 93px; height: 98px;"></div> <!-- Area 2 -->
+</div>
+
+<map name="image-map">
+	
+    <area shape="rect" coords="149,141,243,235" href="#" alt="Area 1" onmouseover="showTooltip(event, 'tooltip1')" onmouseout="hideTooltip('tooltip1')">
+    <area shape="rect" coords="378,169,471,267" href="https://www.vk.com" target="_blank" alt="Area 2" onmouseover="showTooltip(event, 'tooltip2')" onmouseout="hideTooltip('tooltip2')">
+</map>
+
+<script>
+    function showTooltip(event, tooltipId) {
+        const tooltip = document.getElementById(tooltipId);
+        tooltip.style.display = 'block';
+        tooltip.style.left = event.pageX + 'px';
+        tooltip.style.top = event.pageY + 'px';
+    }
+
+    function hideTooltip(tooltipId) {
+        const tooltip = document.getElementById(tooltipId);
+        tooltip.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
