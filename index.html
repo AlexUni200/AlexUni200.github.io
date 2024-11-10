@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Image Map</title>
+    <title>Text goes here</title>
     <style>
+        /* Body and overall layout centering */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -17,16 +18,17 @@
         }
 
         .container {
-            width: 90%; /* Make container width flexible */
-            max-width: 1200px; /* Limit max width */
-            position: relative;
+            max-width: 1200px; /* Limits the container width */
+            text-align: center; /* Centers text */
         }
 
+        /* Title styling */
         h1 {
             font-size: 2rem;
             margin-bottom: 20px;
         }
 
+        /* Description text styling */
         p {
             font-size: 1.2rem;
             margin-bottom: 30px;
@@ -39,44 +41,33 @@
             border: 1px solid #ccc;
             padding: 10px;
             z-index: 100;
-            border-radius: 4px;
-            pointer-events: none;
         }
 
         .highlight {
-            display: none;
             position: absolute;
-            background-color: rgba(255, 0, 0, 0.5);
-            border: 2px solid rgba(255, 0, 0, 1);
-            pointer-events: none;
-            border-radius: 50%;
-        }
-
-        img {
-            width: 100%; /* Make image responsive */
-            height: auto;
-            max-width: 100%;
-            position: relative;
+            background-color: rgba(255, 0, 0, 0.5); /* Red with transparency */
+            border: 2px solid rgba(255, 0, 0, 1); /* Solid red border */
+            pointer-events: none; /* Makes sure mouse events go through to the <area> */
+            border-radius: 50%; /* Makes it circular */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Interactive Image Map</h1>
-    <p>Hover over the areas on the image to see the tooltips.</p>
+    <h1>Text goes here</h1>
+    <p>Text goes here</p>
 
     <div style="position: relative; display: inline-block;">
-        <img id="interactiveImage" src="your-image.jpg" usemap="#image-map" alt="Interactive Image">
+        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
 
         <div id="tooltip1" class="tooltip">Text for Area 1</div>
-        <div id="tooltip2" class="tooltip">Text for Area 2</div>
+        <div id="tooltip2" class="tooltip">Text goes here</div>
 
         <!-- Highlight area (will be updated dynamically by script) -->
         <div id="highlight1" class="highlight"></div>
         <div id="highlight2" class="highlight"></div>
     </div>
-
 
     <map name="image-map">
         <area shape="circle" coords="178,210,30" href="https://www.vk.com" target="_blank" alt="Area 2"
@@ -180,57 +171,35 @@
 </div>
 
 <script>
-    // Helper function to scale coordinates based on image size
-    function scaleCoordinates(x, y, radius) {
-        const img = document.getElementById('interactiveImage');
-        const rect = img.getBoundingClientRect(); // Get the image's position relative to the viewport
-
-        // Scale the coordinates to the actual image size on the screen
-        const scaleX = (x / img.naturalWidth) * rect.width;
-        const scaleY = (y / img.naturalHeight) * rect.height;
-
-        return {
-            left: scaleX - radius, // Adjust for the highlight's position
-            top: scaleY - radius,  // Adjust for the highlight's position
-            size: radius * 2       // Set the diameter of the highlight circle
-        };
-    }
-
-    // Show tooltip and highlight
     function showTooltip(event, tooltipId, x, y, radius) {
         const tooltip = document.getElementById(tooltipId);
-        const highlight = document.getElementById('highlight2'); // We'll use the second highlight div here
-
-        // Make the tooltip visible
         tooltip.style.display = 'block';
-
-        // Get scaled coordinates and size
-        const { left, top, size } = scaleCoordinates(x, y, radius);
-
-        // Update the tooltip position
-        tooltip.style.left = left + 'px';
-        tooltip.style.top = top + 'px';
-
-        // Update the highlight position and size
-        highlight.style.left = left + 'px';
-        highlight.style.top = top + 'px';
-        highlight.style.width = size + 'px';
-        highlight.style.height = size + 'px';
-        highlight.style.display = 'block'; // Show the highlight circle
+        tooltip.style.left = event.pageX + 'px';
+        tooltip.style.top = event.pageY + 'px';
+		tooltip.style.left = (x - 2* radius) + 'px';
+        tooltip.style.top = (y - 2* radius) + 'px';
+        
+        // Update the highlight circle position and size
+        const highlight = document.getElementById('highlight2');
+        highlight.style.left = (x - radius) + 'px';
+        highlight.style.top = (y - radius) + 'px';
+        highlight.style.width = (radius * 2) + 'px';
+        highlight.style.height = (radius * 2) + 'px';
     }
 
-    // Hide tooltip and highlight
     function hideTooltip(tooltipId) {
         const tooltip = document.getElementById(tooltipId);
-        const highlight = document.getElementById('highlight2');
-
-        // Hide the tooltip
         tooltip.style.display = 'none';
-
-        // Hide the highlight circle
-        highlight.style.display = 'none';
+        
+        // Hide the highlight
+        const highlight = document.getElementById('highlight2');
+        highlight.style.width = '0';
+        highlight.style.height = '0';
     }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
