@@ -3,57 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Image Example</title>
+    <title>Text goes here</title>
     <style>
+        /* Body and overall layout centering */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px; /* Limits the container width */
+            text-align: center; /* Centers text */
+        }
+
+        /* Title styling */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Description text styling */
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
         .tooltip {
             display: none;
             position: absolute;
             background: #fff;
             border: 1px solid #ccc;
             padding: 10px;
-            z-index: 10;
+            z-index: 100;
         }
-		.highlight {
+
+        .highlight {
             position: absolute;
             background-color: rgba(255, 0, 0, 0.5); /* Red with transparency */
             border: 2px solid rgba(255, 0, 0, 1); /* Solid red border */
             pointer-events: none; /* Makes sure mouse events go through to the <area> */
+            border-radius: 50%; /* Makes it circular */
         }
     </style>
 </head>
 <body>
 
-<h1>Interactive Image Example</h1>
+<div class="container">
+    <h1>Text goes here</h1>
+    <p>Text goes here</p>
 
-<div style="position: relative;">
-    <img src="https://raw.githubusercontent.com/AlexUni200/AlexUni200.github.io/main/your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
-    
-    <div id="tooltip1" class="tooltip">Text for Area 1</div>
-    <div id="tooltip2" class="tooltip">Text for Area 2</div>
-	
-	<div class="highlight" style="top: 141px; left: 149px; width: 94px; height: 94px;"></div> <!-- Area 1 -->
-    <div class="highlight" style="top: 169px; left: 378px; width: 93px; height: 98px;"></div> <!-- Area 2 -->
+    <div style="position: relative; display: inline-block;">
+        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
+
+        <div id="tooltip1" class="tooltip">Text for Area 1</div>
+        <div id="tooltip2" class="tooltip">Text goes here</div>
+
+        <!-- Highlight area (will be updated dynamically by script) -->
+        <div id="highlight1" class="highlight"></div>
+        <div id="highlight2" class="highlight"></div>
+    </div>
+
+    <map name="image-map">
+        <area shape="circle" coords="178,210,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 210, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="178,316,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 316, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="178,394,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 394, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="178,468,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 468, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="178,546,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 546, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="109,567,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 109, 567, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="120,663,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 120, 663, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="178,624,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 624, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="178,723,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 178, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="274,723,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 274, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="362,723,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 362, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="468,723,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 468, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="548,723,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 548, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="578,620,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 578, 620, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="578,490,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 578, 490, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="578,423,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 578, 423, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="578,348,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 578, 348, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="578,210,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 578, 210, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="400,210,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 400, 210, 30)" onmouseout="hideTooltip('tooltip2')">			
+		
+		<area shape="circle" coords="761,216,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 761, 216, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="761,63,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 761, 63, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="761,291,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 761, 291, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="761,396,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 761, 396, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="761,450,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 761, 450, 30)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="848,63,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 848, 63, 30)" onmouseout="hideTooltip('tooltip2')">	
+		<area shape="circle" coords="848,206,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 848, 206, 30)" onmouseout="hideTooltip('tooltip2')">	
+		<area shape="circle" coords="943,99,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 943, 99, 30)" onmouseout="hideTooltip('tooltip2')">	
+		<area shape="circle" coords="943,174,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 943, 174, 30)" onmouseout="hideTooltip('tooltip2')">	
+		<area shape="circle" coords="1127,63,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1127, 63, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="1127,173,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1127, 173, 30)" onmouseout="hideTooltip('tooltip2')">	
+		<area shape="circle" coords="1040,275,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1040, 275, 30)" onmouseout="hideTooltip('tooltip2')">	
+		<area shape="circle" coords="1127,393,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1127, 393, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="1127,503,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1127, 503, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="1038,393,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1038, 393, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="1038,503,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1038, 503, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="943,503,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 943, 503, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="848,393,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 848, 393, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="851,503,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 851, 503, 30)" onmouseout="hideTooltip('tooltip2')">					
+		<area shape="circle" coords="1127,748,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1127, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="1038,748,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1038, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="943,748,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 943, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="855,748,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 855, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="761,748,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 761, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="1086,641,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 1086, 641, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="993,641,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 993, 641, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="898,641,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 898, 641, 30)" onmouseout="hideTooltip('tooltip2')">			
+		<area shape="circle" coords="803,640,30" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 803, 640, 30)" onmouseout="hideTooltip('tooltip2')">			
+					
+		
+    </map>
 </div>
 
-<map name="image-map">
-	
-    <area shape="rect" coords="149,141,243,235" href="#" alt="Area 1" onmouseover="showTooltip(event, 'tooltip1')" onmouseout="hideTooltip('tooltip1')">
-    <area shape="rect" coords="378,169,471,267" href="https://www.vk.com" target="_blank" alt="Area 2" onmouseover="showTooltip(event, 'tooltip2')" onmouseout="hideTooltip('tooltip2')">
-</map>
-
 <script>
-    function showTooltip(event, tooltipId) {
+    function showTooltip(event, tooltipId, x, y, radius) {
         const tooltip = document.getElementById(tooltipId);
         tooltip.style.display = 'block';
         tooltip.style.left = event.pageX + 'px';
         tooltip.style.top = event.pageY + 'px';
+		tooltip.style.left = (x - 2* radius) + 'px';
+        tooltip.style.top = (y - 2* radius) + 'px';
+        
+        // Update the highlight circle position and size
+        const highlight = document.getElementById('highlight2');
+        highlight.style.left = (x - radius) + 'px';
+        highlight.style.top = (y - radius) + 'px';
+        highlight.style.width = (radius * 2) + 'px';
+        highlight.style.height = (radius * 2) + 'px';
     }
 
     function hideTooltip(tooltipId) {
         const tooltip = document.getElementById(tooltipId);
         tooltip.style.display = 'none';
+        
+        // Hide the highlight
+        const highlight = document.getElementById('highlight2');
+        highlight.style.width = '0';
+        highlight.style.height = '0';
     }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
