@@ -54,148 +54,72 @@
 </head>
 <body>
 
+<body>
 <div class="container">
-    <h1>Text goes here</h1>
-    <p>Text goes here</p>
+    <h1>Responsive Image Map</h1>
+    <p>Hover over the circles!</p>
 
     <div style="position: relative; display: inline-block;">
-        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
-
-        <div id="tooltip1" class="tooltip">Text for Area 1</div>
-        <div id="tooltip2" class="tooltip">Text goes here</div>
-
-        <!-- Highlight area (will be updated dynamically by script) -->
-        <div id="highlight1" class="highlight"></div>
-        <div id="highlight2" class="highlight"></div>
+        <img id="myImage" src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
+        <div id="tooltip" class="tooltip"></div>  <!-- Single tooltip -->
+        <div id="highlight" class="highlight"></div> <!-- Single highlight -->
     </div>
 
-        <map name="image-map">
-        <area shape="circle" coords="212,245,35" href="https://www.vk.com" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 212, 245, 35)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="178,316,30" href="https://www.vk.com" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 316, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="178,394,30" href="https://https://old.reddit.com/r/AskHistorians/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 394, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="178,468,30" href="https://https://old.reddit.com/r/AskHistorians1/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 468, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="178,546,30" href="https://https://old.reddit.com/r/AskHistorians2/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 546, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="109,567,30" href="https://https://old.reddit.com/r/AskHistorians3/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 109, 567, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="120,663,30" href="https://https://old.reddit.com/r/AskHistorians4/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 120, 663, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="178,624,30" href="https://https://old.reddit.com/r/AskHistorians5/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 624, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="178,723,30" href="https://https://old.reddit.com/r/AskHistorians6/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="274,723,30" href="https://https://old.reddit.com/r/AskHistorians7/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 274, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="362,723,30" href="https://https://old.reddit.com/r/AskHistorians8/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 362, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="468,723,30" href="https://https://old.reddit.com/r/AskHistorians9/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 468, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="548,723,30" href="https://https://old.reddit.com/r/AskHistorians10/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 548, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="578,620,30" href="https://https://old.reddit.com/r/AskHistorians11/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 578, 620, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="578,490,30" href="https://https://old.reddit.com/r/AskHistorians12/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 578, 490, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="578,423,30" href="https://https://old.reddit.com/r/AskHistorians13/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 578, 423, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="578,348,30" href="https://https://old.reddit.com/r/AskHistorians14/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 578, 348, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="578,210,30" href="https://https://old.reddit.com/r/AskHistorians15/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 578, 210, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="400,210,30" href="https://https://old.reddit.com/r/AskHistorians16/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 400, 210, 30)" onmouseout="hideTooltip('tooltip2')">			
-		
-		<area shape="circle" coords="761,216,30" href="https://https://old.reddit.com/r/AskHistorians17/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 761, 216, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="761,63,30" href="https://https://old.reddit.com/r/AskHistorians18/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 761, 63, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="761,291,30" href="https://https://old.reddit.com/r/AskHistorians19/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 761, 291, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="761,396,30" href="https://https://old.reddit.com/r/AskHistorians20/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 761, 396, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="761,450,30" href="https://https://old.reddit.com/r/AskHistorians21/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 761, 450, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="848,63,30" href="https://https://old.reddit.com/r/AskHistorians22/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 848, 63, 30)" onmouseout="hideTooltip('tooltip2')">	
-		<area shape="circle" coords="848,206,30" href="https://https://old.reddit.com/r/AskHistorians23/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 848, 206, 30)" onmouseout="hideTooltip('tooltip2')">	
-		<area shape="circle" coords="943,99,30" href="https://https://old.reddit.com/r/AskHistorians124/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 943, 99, 30)" onmouseout="hideTooltip('tooltip2')">	
-		<area shape="circle" coords="943,174,30" href="https://https://old.reddit.com/r/AskHistorians25/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 943, 174, 30)" onmouseout="hideTooltip('tooltip2')">	
-		<area shape="circle" coords="1127,63,30" href="https://https://old.reddit.com/r/AskHistorians26/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1127, 63, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="1127,173,30" href="https://https://old.reddit.com/r/AskHistorians27/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1127, 173, 30)" onmouseout="hideTooltip('tooltip2')">	
-		<area shape="circle" coords="1040,275,30" href="https://https://old.reddit.com/r/AskHistorians28/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1040, 275, 30)" onmouseout="hideTooltip('tooltip2')">	
-		<area shape="circle" coords="1127,393,30" href="https://https://old.reddit.com/r/AskHistorians29/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1127, 393, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="1127,503,30" href="https://https://old.reddit.com/r/AskHistorians30/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1127, 503, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="1038,393,30" href="https://https://old.reddit.com/r/AskHistorians31/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1038, 393, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="1038,503,30" href="https://https://old.reddit.com/r/AskHistorians32/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1038, 503, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="943,503,30" href="https://https://old.reddit.com/r/AskHistorians33/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 943, 503, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="848,393,30" href="https://https://old.reddit.com/r/AskHistorians34/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 848, 393, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="851,503,30" href="https://https://old.reddit.com/r/AskHistorians35/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 851, 503, 30)" onmouseout="hideTooltip('tooltip2')">					
-		<area shape="circle" coords="1127,748,30" href="https://https://old.reddit.com/r/AskHistorians36/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1127, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="1038,748,30" href="https://https://old.reddit.com/r/AskHistorians37/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1038, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="943,748,30" href="https://https://old.reddit.com/r/AskHistorians38/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 943, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="855,748,30" href="https://https://old.reddit.com/r/AskHistorians39/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 855, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="761,748,30" href="https://https://old.reddit.com/r/AskHistorians40/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 761, 748, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="1086,641,30" href="https://https://old.reddit.com/r/AskHistorians41/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 1086, 641, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="993,641,30" href="https://https://old.reddit.com/r/AskHistorians42/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 993, 641, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="898,641,30" href="https://https://old.reddit.com/r/AskHistorians43/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 898, 641, 30)" onmouseout="hideTooltip('tooltip2')">			
-		<area shape="circle" coords="803,640,30" href="https://https://old.reddit.com/r/AskHistorians44/" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 803, 640, 30)" onmouseout="hideTooltip('tooltip2')">			
-					
-		
+    <map name="image-map">
+        <!--  Area definitions will be dynamically added by JavaScript -->
     </map>
 </div>
 
 <script>
-    function showTooltip(event, tooltipId, x, y, radius) {
-        const tooltip = document.getElementById(tooltipId);
-        tooltip.style.display = 'block';
-        tooltip.style.left = event.pageX + 'px';
-        tooltip.style.top = event.pageY + 'px';
-		tooltip.style.left = (x - 2* radius) + 'px';
-        tooltip.style.top = (y - 2* radius) + 'px';
-        
-        // Update the highlight circle position and size
-        const highlight = document.getElementById('highlight2');
-        highlight.style.left = (x - radius) + 'px';
-        highlight.style.top = (y - radius) + 'px';
-        highlight.style.width = (radius * 2) + 'px';
-        highlight.style.height = (radius * 2) + 'px';
-    }
+	const image = document.getElementById('myImage');
+	const map = document.querySelector('map');
+	const tooltip = document.getElementById('tooltip');
+	const highlight = document.getElementById('highlight');
 
-    function hideTooltip(tooltipId) {
-        const tooltip = document.getElementById(tooltipId);
-        tooltip.style.display = 'none';
-        
-        // Hide the highlight
-        const highlight = document.getElementById('highlight2');
-        highlight.style.width = '0';
-        highlight.style.height = '0';
-    }
+	const circleData = [
+		// ... your circle data here ...  (x, y, r, url, text)
+		{ x: 178, y: 316, r: 30, url: "https://www.vk.com", text: "Text goes here" },
+		{ x: 178, y: 394, r: 30, url: "https://old.reddit.com/r/AskHistorians/", text: "AskHistorians" },
+		// ... and so on
+	];
+
+	image.onload = function() {
+    const imgWidth = this.width;
+    const imgHeight = this.height;
+
+    circleData.forEach(circle => {
+        const area = document.createElement('area');
+        area.shape = 'circle';
+
+        // Correct calculation: Convert to pixel coordinates based on scaled image
+        const scaledX = (circle.x / imgWidth) * image.offsetWidth;
+        const scaledY = (circle.y / imgHeight) * image.offsetHeight;
+        const scaledR = (circle.r / Math.min(imgWidth, imgHeight)) * Math.min(image.offsetWidth, image.offsetHeight);
+
+		//Set coords to pixel values
+        area.coords = `${scaledX},${scaledY},${scaledR}`;
+        area.href = circle.url;
+        area.target = '_blank';
+        area.alt = circle.text;
+        area.onmouseover = function(event) {
+            tooltip.style.display = 'block';
+            tooltip.textContent = circle.text;
+            tooltip.style.left = (event.offsetX + image.offsetLeft) + 'px';
+            tooltip.style.top = (event.offsetY + image.offsetTop) + 'px';
+
+            highlight.style.left = (scaledX - scaledR) + 'px';
+            highlight.style.top = (scaledY - scaledR) + 'px';
+            highlight.style.width = (scaledR * 2) + 'px';
+            highlight.style.height = (scaledR * 2) + 'px';
+            highlight.style.display = 'block';
+        };
+        area.onmouseout = function() {
+            tooltip.style.display = 'none';
+            highlight.style.display = 'none';
+        };
+        map.appendChild(area);
+    });
+};
 </script>
 
 </body>
