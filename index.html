@@ -216,16 +216,50 @@
         highlight.style.display = 'none';
     }
 
-    // Add touch support for mobile devices
+    // Calculate the scale factor for responsive image
+    function getImageScaleFactor(image) {
+        const naturalWidth = image.naturalWidth;
+        const naturalHeight = image.naturalHeight;
+        const actualWidth = image.offsetWidth;
+        const actualHeight = image.offsetHeight;
+        
+        // If the image is scaled down, calculate the scale factor
+        const scaleX = actualWidth / naturalWidth;
+        const scaleY = actualHeight / naturalHeight;
+        
+        return { scaleX, scaleY };
+    }
+
+    // Update coordinates for mobile devices
+    function adjustCoordinatesForMobile(event, area) {
+        const image = document.getElementById('interactive-image');
+        const { scaleX, scaleY } = getImageScaleFactor(image);
+
+        const coords = area.coords.split(',').map(Number);
+        const x = coords[0] * scaleX;
+        const y = coords[1] * scaleY;
+        const radius = coords[2] * scaleX; // Adjust radius for scaling
+
+        showTooltip(event, area.alt, x, y, radius);
+    }
+
+    // Add event listeners for mouseover and touchstart on each area
     const areas = document.querySelectorAll('area');
     areas.forEach(area => {
-        area.addEventListener('touchstart', function(event) {
-            const coords = area.coords.split(',').map(Number);
-            const radius = coords[2];
-            showTooltip(event, 'tooltip2', coords[0], coords[1], radius);
+        area.addEventListener('mouseover', function(event) {
+            adjustCoordinatesForMobile(event, area);
         });
 
-        area.addEventListener('touchend', function(event) {
+        area.addEventListener('touchstart', function(event) {
+            event.preventDefault();  // Prevents multiple triggers on mobile
+            adjustCoordinatesForMobile(event, area);
+        });
+
+        area.addEventListener('mouseout', function() {
+            hideTooltip('tooltip2');
+        });
+
+        area.addEventListener('touchend', function() {
             hideTooltip('tooltip2');
         });
     });
