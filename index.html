@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text goes here</title>
     <style>
-        /* Body and overall layout centering */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -18,21 +17,22 @@
         }
 
         .container {
-            max-width: 1200px; /* Limits the container width */
-            text-align: center; /* Centers text */
-            width: 100%; /* Ensure the container is responsive */
+            max-width: 1200px;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Title styling */
-        h1 {
-            font-size: 2rem;
+        h1, p {
             margin-bottom: 20px;
         }
 
-        /* Description text styling */
+        h1 {
+            font-size: 2rem;
+        }
+
         p {
             font-size: 1.2rem;
-            margin-bottom: 30px;
         }
 
         .tooltip {
@@ -49,32 +49,30 @@
         .highlight {
             display: none;
             position: absolute;
-            background-color: rgba(255, 0, 0, 0.5); /* Red with transparency */
-            border: 2px solid rgba(255, 0, 0, 1); /* Solid red border */
-            pointer-events: none; /* Makes sure mouse events go through to the <area> */
-            border-radius: 50%; /* Makes it circular */
+            background-color: rgba(255, 0, 0, 0.5);
+            border: 2px solid rgba(255, 0, 0, 1);
+            pointer-events: none;
+            border-radius: 50%;
         }
 
-        /* Responsive Image */
         img {
             max-width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
+            position: relative;
         }
 
-        /* Ensuring the container doesn't overflow the viewport */
-        .container {
-            max-width: 100%;
-            overflow-x: hidden;
+        map {
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Text goes here</h1>
-    <p>Text goes here</p>
+    <h1>Interactive Image Map</h1>
+    <p>Hover or tap on areas to see tooltips</p>
 
     <div style="position: relative; display: inline-block;">
         <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" id="interactive-image">
@@ -82,7 +80,6 @@
         <div id="tooltip1" class="tooltip">Text for Area 1</div>
         <div id="tooltip2" class="tooltip">Text goes here</div>
 
-        <!-- Highlight area (will be updated dynamically by script) -->
         <div id="highlight1" class="highlight"></div>
         <div id="highlight2" class="highlight"></div>
     </div>
@@ -194,17 +191,20 @@
         const tooltip = document.getElementById(tooltipId);
         tooltip.style.display = 'block';
 
-        // Adjusting tooltip position to be better for both mobile and desktop
-        tooltip.style.left = (x - 2 * radius) + 'px';
-        tooltip.style.top = (y - 2 * radius) + 'px';
+        // Adjusting tooltip position based on image scale
+        const image = document.getElementById('interactive-image');
+        const scale = getImageScaleFactor(image);
+
+        tooltip.style.left = (x * scale.scaleX - 2 * radius) + 'px';
+        tooltip.style.top = (y * scale.scaleY - 2 * radius) + 'px';
 
         // Update the highlight circle position and size
         const highlight = document.getElementById('highlight2');
         highlight.style.display = 'block';
-        highlight.style.left = (x - radius) + 'px';
-        highlight.style.top = (y - radius) + 'px';
-        highlight.style.width = (radius * 2) + 'px';
-        highlight.style.height = (radius * 2) + 'px';
+        highlight.style.left = (x * scale.scaleX - radius) + 'px';
+        highlight.style.top = (y * scale.scaleY - radius) + 'px';
+        highlight.style.width = (radius * 2 * scale.scaleX) + 'px';
+        highlight.style.height = (radius * 2 * scale.scaleY) + 'px';
     }
 
     // Hide the tooltip and highlight
@@ -223,24 +223,11 @@
         const actualWidth = image.offsetWidth;
         const actualHeight = image.offsetHeight;
         
-        // If the image is scaled down, calculate the scale factor
+        // Calculate scale factor based on actual image size and its natural size
         const scaleX = actualWidth / naturalWidth;
         const scaleY = actualHeight / naturalHeight;
-        
+
         return { scaleX, scaleY };
-    }
-
-    // Update coordinates for mobile devices
-    function adjustCoordinatesForMobile(event, area) {
-        const image = document.getElementById('interactive-image');
-        const { scaleX, scaleY } = getImageScaleFactor(image);
-
-        const coords = area.coords.split(',').map(Number);
-        const x = coords[0] * scaleX;
-        const y = coords[1] * scaleY;
-        const radius = coords[2] * scaleX; // Adjust radius for scaling
-
-        showTooltip(event, area.alt, x, y, radius);
     }
 
     // Add event listeners for mouseover and touchstart on each area
@@ -264,12 +251,18 @@
         });
     });
 
-    // Adjust tooltip position dynamically based on image size for mobile devices
-    const image = document.getElementById('interactive-image');
-    image.addEventListener('load', function() {
-        // Ensure image map works on different sizes (responsive images)
-        image.useMap = '#image-map';
-    });
+    // Adjust coordinates and display tooltips for mobile
+    function adjustCoordinatesForMobile(event, area) {
+        const image = document.getElementById('interactive-image');
+        const { scaleX, scaleY } = getImageScaleFactor(image);
+
+        const coords = area.coords.split(',').map(Number);
+        const x = coords[0];
+        const y = coords[1];
+        const radius = coords[2];
+
+        showTooltip(event, area.alt, x, y, radius);
+    }
 </script>
 
 </body>
