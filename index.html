@@ -55,14 +55,12 @@
     </style>
 </head>
 <body>
-
 <div class="container">
     <h1>Text goes here</h1>
     <p>Text goes here</p>
 
     <div style="position: relative;">
         <img id="myImage" src="your-image.jpg" usemap="#image-map" alt="Interactive Image">
-
         <div id="tooltip2" class="tooltip">Text goes here</div>
         <div id="highlight2" class="highlight"></div>
     </div>
@@ -169,25 +167,33 @@
 
 <script>
     function showTooltip(event, tooltipId, x, y, radius) {
-		console.log(event.target)
         const tooltip = document.getElementById(tooltipId);
-        const img = document.getElementById('myImage');  // Get the image element
-        const rect = img.getBoundingClientRect(); // Get image's position and size
+        const img = document.getElementById('myImage');
+        const rect = img.getBoundingClientRect();
+        const imgWidth = img.naturalWidth; // Original image width
+        const imgHeight = img.naturalHeight; // Original image height
+        const renderedWidth = rect.width; // Rendered image width
+        const renderedHeight = rect.height; // Rendered image height
 
-        // Calculate tooltip position relative to the image
-        const tooltipX = x - radius + rect.left;
-        const tooltipY = y - radius + rect.top;
+        // Calculate scaling factors
+        const scaleX = renderedWidth / imgWidth;
+        const scaleY = renderedHeight / imgHeight;
+
+
+        // Scale the coordinates to match the rendered image size
+        const scaledX = x * scaleX + rect.left;
+        const scaledY = y * scaleY + rect.top;
+        const scaledRadius = radius * scaleX; //Scale radius also
 
         tooltip.style.display = 'block';
-        tooltip.style.left = tooltipX + 'px';
-        tooltip.style.top = tooltipY + 'px';
+        tooltip.style.left = (scaledX - 2 * scaledRadius) + 'px'; // Adjust for tooltip offset
+        tooltip.style.top = (scaledY - 2 * scaledRadius) + 'px';   // Adjust for tooltip offset
 
-        // Update the highlight circle position and size relative to the image
         const highlight = document.getElementById('highlight2');
-        highlight.style.left = (x - radius) + 'px';
-        highlight.style.top = (y - radius) + 'px';
-        highlight.style.width = (radius * 2) + 'px';
-        highlight.style.height = (radius * 2) + 'px';
+        highlight.style.left = (scaledX - scaledRadius) + 'px';
+        highlight.style.top = (scaledY - scaledRadius) + 'px';
+        highlight.style.width = (scaledRadius * 2) + 'px';
+        highlight.style.height = (scaledRadius * 2) + 'px';
     }
 
     function hideTooltip(tooltipId) {
@@ -200,4 +206,3 @@
 </script>
 
 </body>
-</html>
