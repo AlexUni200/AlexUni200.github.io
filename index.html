@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Image Map</title>
+    <title>Text goes here</title>
     <style>
+        /* Body and overall layout centering */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -17,22 +18,20 @@
         }
 
         .container {
-            max-width: 1200px;
-            width: 100%;
-            overflow-x: hidden;
-            position: relative;
+            max-width: 1200px; /* Limits the container width */
+            text-align: center; /* Centers text */
         }
 
-        h1, p {
+        /* Title styling */
+        h1 {
+            font-size: 2rem;
             margin-bottom: 20px;
         }
 
-        h1 {
-            font-size: 2rem;
-        }
-
+        /* Description text styling */
         p {
             font-size: 1.2rem;
+            margin-bottom: 30px;
         }
 
         .tooltip {
@@ -42,45 +41,35 @@
             border: 1px solid #ccc;
             padding: 10px;
             z-index: 100;
-            pointer-events: none;
-            font-size: 1rem;
         }
 
         .highlight {
-            display: none;
             position: absolute;
-            background-color: rgba(255, 0, 0, 0.5);
-            border: 2px solid rgba(255, 0, 0, 1);
-            pointer-events: none;
-            border-radius: 50%;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        map {
-            display: inline-block;
+            background-color: rgba(255, 0, 0, 0.5); /* Red with transparency */
+            border: 2px solid rgba(255, 0, 0, 1); /* Solid red border */
+            pointer-events: none; /* Makes sure mouse events go through to the <area> */
+            border-radius: 50%; /* Makes it circular */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Interactive Image Map</h1>
-    <p>Hover or tap on areas to see tooltips</p>
+    <h1>Text goes here</h1>
+    <p>Text goes here</p>
 
     <div style="position: relative; display: inline-block;">
-        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" id="interactive-image">
+        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
 
-        <div id="tooltip" class="tooltip"></div> <div id="highlight" class="highlight"></div>
+        <div id="tooltip1" class="tooltip">Text for Area 1</div>
+        <div id="tooltip2" class="tooltip">Text goes here</div>
+
+        <!-- Highlight area (will be updated dynamically by script) -->
+        <div id="highlight1" class="highlight"></div>
+        <div id="highlight2" class="highlight"></div>
     </div>
-	
-    <map name="image-map">
+
+        <map name="image-map">
         <area shape="circle" coords="212,245,35" href="https://www.vk.com" target="_blank" alt="Area 2"
             onmouseover="showTooltip(event, 'tooltip2', 212, 245, 35)" onmouseout="hideTooltip('tooltip2')">
 		<area shape="circle" coords="178,316,30" href="https://www.vk.com" target="_blank" alt="Area 2"
@@ -180,61 +169,37 @@
 		
     </map>
 </div>
+
 <script>
-  const image = document.getElementById('interactive-image');
-const tooltip = document.getElementById('tooltip');
-const highlight = document.getElementById('highlight');
-
-function showTooltip(event, area) {
-    const rect = image.getBoundingClientRect();
-    const scaleX = image.offsetWidth / image.naturalWidth;
-    const scaleY = image.offsetHeight / image.naturalHeight;
-
-    const coordsString = area.coords; // Get the coords string directly
-
-    //Robust parsing of the coords string:
-    const coords = coordsString.split(',').map(coord => parseFloat(coord.trim())).filter(coord => !isNaN(coord));
-
-
-    if (coords.length >= 3) { // Check if at least x, y, radius are present
-      const x = coords[0];
-      const y = coords[1];
-      const radius = coords[2];
-
-      const tooltipX = (x * scaleX) + rect.left - (radius * scaleX);
-      const tooltipY = (y * scaleY) + rect.top - (radius * scaleY);
-
-      tooltip.style.display = 'block';
-      tooltip.style.left = tooltipX + 'px';
-      tooltip.style.top = tooltipY + 'px';
-      tooltip.textContent = area.dataset.tooltip;
-
-      highlight.style.display = 'block';
-      highlight.style.left = (x * scaleX - radius * scaleX) + 'px';
-      highlight.style.top = (y * scaleY - radius * scaleY) + 'px';
-      highlight.style.width = (radius * 2 * scaleX) + 'px';
-      highlight.style.height = (radius * 2 * scaleY) + 'px';
-    } else {
-      console.error("Invalid coordinates for area:", area);
+    function showTooltip(event, tooltipId, x, y, radius) {
+        const tooltip = document.getElementById(tooltipId);
+        tooltip.style.display = 'block';
+        tooltip.style.left = event.pageX + 'px';
+        tooltip.style.top = event.pageY + 'px';
+		tooltip.style.left = (x - 2* radius) + 'px';
+        tooltip.style.top = (y - 2* radius) + 'px';
+        
+        // Update the highlight circle position and size
+        const highlight = document.getElementById('highlight2');
+        highlight.style.left = (x - radius) + 'px';
+        highlight.style.top = (y - radius) + 'px';
+        highlight.style.width = (radius * 2) + 'px';
+        highlight.style.height = (radius * 2) + 'px';
     }
-}
 
-function hideTooltip() {
-    tooltip.style.display = 'none';
-    highlight.style.display = 'none';
-}
-
-const areas = document.querySelectorAll('map area');
-areas.forEach(area => {
-    area.addEventListener('mouseover', () => showTooltip(event, area));
-    area.addEventListener('mouseout', hideTooltip);
-    area.addEventListener('touchstart', (e) => { e.preventDefault(); showTooltip(e, area); });
-    area.addEventListener('touchend', hideTooltip);
-});
-
+    function hideTooltip(tooltipId) {
+        const tooltip = document.getElementById(tooltipId);
+        tooltip.style.display = 'none';
+        
+        // Hide the highlight
+        const highlight = document.getElementById('highlight2');
+        highlight.style.width = '0';
+        highlight.style.height = '0';
+    }
 </script>
 
 </body>
 </html>
+
 </body>
 </html>
