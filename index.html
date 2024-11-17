@@ -190,25 +190,33 @@ function showTooltip(event, area) {
     const scaleX = image.offsetWidth / image.naturalWidth;
     const scaleY = image.offsetHeight / image.naturalHeight;
 
-    const coords = area.coords.split(',').map(Number);
-    const x = coords[0];
-    const y = coords[1];
-    const radius = coords[2];
+    const coordsString = area.coords; // Get the coords string directly
 
-    //Corrected scaling for the tooltip position and highlight size:
-    const tooltipX = (x * scaleX) + rect.left - (radius * scaleX); //Subtracting radius*scaleX here
-    const tooltipY = (y * scaleY) + rect.top - (radius * scaleY); //Subtracting radius*scaleY here
+    //Robust parsing of the coords string:
+    const coords = coordsString.split(',').map(coord => parseFloat(coord.trim())).filter(coord => !isNaN(coord));
 
-    tooltip.style.display = 'block';
-    tooltip.style.left = tooltipX + 'px';
-    tooltip.style.top = tooltipY + 'px';
-    tooltip.textContent = area.dataset.tooltip;
 
-    highlight.style.display = 'block';
-    highlight.style.left = (x * scaleX - radius * scaleX) + 'px';
-    highlight.style.top = (y * scaleY - radius * scaleY) + 'px';
-    highlight.style.width = (radius * 2 * scaleX) + 'px';
-    highlight.style.height = (radius * 2 * scaleY) + 'px';
+    if (coords.length >= 3) { // Check if at least x, y, radius are present
+      const x = coords[0];
+      const y = coords[1];
+      const radius = coords[2];
+
+      const tooltipX = (x * scaleX) + rect.left - (radius * scaleX);
+      const tooltipY = (y * scaleY) + rect.top - (radius * scaleY);
+
+      tooltip.style.display = 'block';
+      tooltip.style.left = tooltipX + 'px';
+      tooltip.style.top = tooltipY + 'px';
+      tooltip.textContent = area.dataset.tooltip;
+
+      highlight.style.display = 'block';
+      highlight.style.left = (x * scaleX - radius * scaleX) + 'px';
+      highlight.style.top = (y * scaleY - radius * scaleY) + 'px';
+      highlight.style.width = (radius * 2 * scaleX) + 'px';
+      highlight.style.height = (radius * 2 * scaleY) + 'px';
+    } else {
+      console.error("Invalid coordinates for area:", area);
+    }
 }
 
 function hideTooltip() {
