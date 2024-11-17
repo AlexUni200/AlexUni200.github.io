@@ -20,6 +20,7 @@
         .container {
             max-width: 1200px; /* Limits the container width */
             text-align: center; /* Centers text */
+            width: 100%; /* Ensure the container is responsive */
         }
 
         /* Title styling */
@@ -41,14 +42,31 @@
             border: 1px solid #ccc;
             padding: 10px;
             z-index: 100;
+            pointer-events: none;
+            font-size: 1rem;
         }
 
         .highlight {
+            display: none;
             position: absolute;
             background-color: rgba(255, 0, 0, 0.5); /* Red with transparency */
             border: 2px solid rgba(255, 0, 0, 1); /* Solid red border */
             pointer-events: none; /* Makes sure mouse events go through to the <area> */
             border-radius: 50%; /* Makes it circular */
+        }
+
+        /* Responsive Image */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Ensuring the container doesn't overflow the viewport */
+        .container {
+            max-width: 100%;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -59,7 +77,7 @@
     <p>Text goes here</p>
 
     <div style="position: relative; display: inline-block;">
-        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
+        <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" id="interactive-image">
 
         <div id="tooltip1" class="tooltip">Text for Area 1</div>
         <div id="tooltip2" class="tooltip">Text goes here</div>
@@ -70,8 +88,8 @@
     </div>
 
     <map name="image-map">
-        <area shape="circle" coords="178,210,30" href="https://www.vk.com" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 210, 30)" onmouseout="hideTooltip('tooltip2')">
+        <area shape="circle" coords="212,245,35" href="https://www.vk.com" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 212, 245, 35)" onmouseout="hideTooltip('tooltip2')">
 		<area shape="circle" coords="178,316,30" href="https://www.vk.com" target="_blank" alt="Area 2"
             onmouseover="showTooltip(event, 'tooltip2', 178, 316, 30)" onmouseout="hideTooltip('tooltip2')">
 		<area shape="circle" coords="178,394,30" href="https://www.vk.com" target="_blank" alt="Area 2"
@@ -171,35 +189,54 @@
 </div>
 
 <script>
+    // Function to handle tooltip visibility and highlight for desktop and mobile
     function showTooltip(event, tooltipId, x, y, radius) {
         const tooltip = document.getElementById(tooltipId);
         tooltip.style.display = 'block';
-        tooltip.style.left = event.pageX + 'px';
-        tooltip.style.top = event.pageY + 'px';
-		tooltip.style.left = (x - 2* radius) + 'px';
-        tooltip.style.top = (y - 2* radius) + 'px';
-        
+
+        // Adjusting tooltip position to be better for both mobile and desktop
+        tooltip.style.left = (x - 2 * radius) + 'px';
+        tooltip.style.top = (y - 2 * radius) + 'px';
+
         // Update the highlight circle position and size
         const highlight = document.getElementById('highlight2');
+        highlight.style.display = 'block';
         highlight.style.left = (x - radius) + 'px';
         highlight.style.top = (y - radius) + 'px';
         highlight.style.width = (radius * 2) + 'px';
         highlight.style.height = (radius * 2) + 'px';
     }
 
+    // Hide the tooltip and highlight
     function hideTooltip(tooltipId) {
         const tooltip = document.getElementById(tooltipId);
         tooltip.style.display = 'none';
-        
-        // Hide the highlight
-        const highlight = document.getElementById('highlight2');
-        highlight.style.width = '0';
-        highlight.style.height = '0';
-    }
-</script>
 
-</body>
-</html>
+        const highlight = document.getElementById('highlight2');
+        highlight.style.display = 'none';
+    }
+
+    // Add touch support for mobile devices
+    const areas = document.querySelectorAll('area');
+    areas.forEach(area => {
+        area.addEventListener('touchstart', function(event) {
+            const coords = area.coords.split(',').map(Number);
+            const radius = coords[2];
+            showTooltip(event, 'tooltip2', coords[0], coords[1], radius);
+        });
+
+        area.addEventListener('touchend', function(event) {
+            hideTooltip('tooltip2');
+        });
+    });
+
+    // Adjust tooltip position dynamically based on image size for mobile devices
+    const image = document.getElementById('interactive-image');
+    image.addEventListener('load', function() {
+        // Ensure image map works on different sizes (responsive images)
+        image.useMap = '#image-map';
+    });
+</script>
 
 </body>
 </html>
