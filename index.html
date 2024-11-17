@@ -181,48 +181,48 @@
     </map>
 </div>
 <script>
-    const image = document.getElementById('interactive-image');
-    const tooltip = document.getElementById('tooltip');
-    const highlight = document.getElementById('highlight');
+  const image = document.getElementById('interactive-image');
+const tooltip = document.getElementById('tooltip');
+const highlight = document.getElementById('highlight');
 
-    function showTooltip(event, area) {
-        const rect = image.getBoundingClientRect();
-        const scaleX = image.offsetWidth / image.naturalWidth;
-        const scaleY = image.offsetHeight / image.naturalHeight;
+function showTooltip(event, area) {
+    const rect = image.getBoundingClientRect();
+    const scaleX = image.offsetWidth / image.naturalWidth;
+    const scaleY = image.offsetHeight / image.naturalHeight;
 
-        const coords = area.coords.split(',').map(Number);
-        const x = coords[0];
-        const y = coords[1];
-        const radius = coords[2];
+    const coords = area.coords.split(',').map(Number);
+    const x = coords[0];
+    const y = coords[1];
+    const radius = coords[2];
 
-        const tooltipX = (x * scaleX) - radius * scaleX + rect.left;
-        const tooltipY = (y * scaleY) - radius * scaleY + rect.top;
+    //Corrected scaling for the tooltip position and highlight size:
+    const tooltipX = (x * scaleX) + rect.left - (radius * scaleX); //Subtracting radius*scaleX here
+    const tooltipY = (y * scaleY) + rect.top - (radius * scaleY); //Subtracting radius*scaleY here
 
-        tooltip.style.display = 'block';
-        tooltip.style.left = tooltipX + 'px';
-        tooltip.style.top = tooltipY + 'px';
-        tooltip.textContent = area.dataset.tooltip; //Use data attributes for tooltip text
+    tooltip.style.display = 'block';
+    tooltip.style.left = tooltipX + 'px';
+    tooltip.style.top = tooltipY + 'px';
+    tooltip.textContent = area.dataset.tooltip;
 
-        highlight.style.display = 'block';
-        highlight.style.left = (x * scaleX - radius * scaleX) + 'px';
-        highlight.style.top = (y * scaleY - radius * scaleY) + 'px';
-        highlight.style.width = (radius * 2 * scaleX) + 'px';
-        highlight.style.height = (radius * 2 * scaleY) + 'px';
-    }
+    highlight.style.display = 'block';
+    highlight.style.left = (x * scaleX - radius * scaleX) + 'px';
+    highlight.style.top = (y * scaleY - radius * scaleY) + 'px';
+    highlight.style.width = (radius * 2 * scaleX) + 'px';
+    highlight.style.height = (radius * 2 * scaleY) + 'px';
+}
 
-    function hideTooltip() {
-        tooltip.style.display = 'none';
-        highlight.style.display = 'none';
-    }
+function hideTooltip() {
+    tooltip.style.display = 'none';
+    highlight.style.display = 'none';
+}
 
-
-    const areas = document.querySelectorAll('map area');
-    areas.forEach(area => {
-        area.addEventListener('mouseover', () => showTooltip(event, area));
-        area.addEventListener('mouseout', hideTooltip);
-        area.addEventListener('touchstart', (e) => { e.preventDefault(); showTooltip(e, area); });
-        area.addEventListener('touchend', hideTooltip);
-    });
+const areas = document.querySelectorAll('map area');
+areas.forEach(area => {
+    area.addEventListener('mouseover', () => showTooltip(event, area));
+    area.addEventListener('mouseout', hideTooltip);
+    area.addEventListener('touchstart', (e) => { e.preventDefault(); showTooltip(e, area); });
+    area.addEventListener('touchend', hideTooltip);
+});
 
 </script>
 
