@@ -17,10 +17,10 @@
         }
 
         .container {
-            max-width: 100%;
+            max-width: 1200px;
             width: 100%;
+            overflow-x: hidden;
             position: relative;
-            text-align: center;
         }
 
         h1, p {
@@ -44,7 +44,6 @@
             z-index: 100;
             pointer-events: none;
             font-size: 1rem;
-            white-space: nowrap;
         }
 
         .highlight {
@@ -61,6 +60,7 @@
             height: auto;
             display: block;
             margin: 0 auto;
+            position: relative;
         }
 
         map {
@@ -77,15 +77,13 @@
     <div style="position: relative; display: inline-block;">
         <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" id="interactive-image">
 
-        <!-- Tooltip divs for each area -->
         <div id="tooltip1" class="tooltip">Text for Area 1</div>
-        <div id="tooltip2" class="tooltip">Text for Area 2</div>
+        <div id="tooltip2" class="tooltip">Text goes here</div>
 
-        <!-- Highlight divs for each area -->
         <div id="highlight1" class="highlight"></div>
         <div id="highlight2" class="highlight"></div>
     </div>
-
+	
     <map name="image-map">
         <area shape="circle" coords="212,245,35" href="https://www.vk.com" target="_blank" alt="Area 2"
             onmouseover="showTooltip(event, 'tooltip2', 212, 245, 35)" onmouseout="hideTooltip('tooltip2')">
@@ -196,6 +194,7 @@
         const image = document.getElementById('interactive-image');
         const scale = getImageScaleFactor(image);
 
+        // Position the tooltip correctly based on the scaled image coordinates
         tooltip.style.left = (x * scale.scaleX - 2 * radius) + 'px';
         tooltip.style.top = (y * scale.scaleY - 2 * radius) + 'px';
 
@@ -235,7 +234,7 @@
     const areas = document.querySelectorAll('area');
     areas.forEach(area => {
         area.addEventListener('mouseover', function(event) {
-            adjustCoordinatesForMobile(event, area);
+            adjustCoordinatesForDesktop(event, area);
         });
 
         area.addEventListener('touchstart', function(event) {
@@ -254,6 +253,19 @@
 
     // Adjust coordinates and display tooltips for mobile
     function adjustCoordinatesForMobile(event, area) {
+        const image = document.getElementById('interactive-image');
+        const { scaleX, scaleY } = getImageScaleFactor(image);
+
+        const coords = area.coords.split(',').map(Number);
+        const x = coords[0];
+        const y = coords[1];
+        const radius = coords[2];
+
+        showTooltip(event, area.alt, x, y, radius);
+    }
+
+    // Adjust coordinates and display tooltips for desktop
+    function adjustCoordinatesForDesktop(event, area) {
         const image = document.getElementById('interactive-image');
         const { scaleX, scaleY } = getImageScaleFactor(image);
 
