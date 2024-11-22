@@ -61,8 +61,15 @@
     <div style="position: relative; display: inline-block;">
         <img src="your-image.jpg" usemap="#image-map" alt="Interactive Image" style="max-width: 100%;">
 
-        <div id="tooltip1" class="tooltip">Text for Area 1</div>
-        <div id="tooltip2" class="tooltip">Text goes here</div>
+        <div id="tooltip1" class="tooltip">https://vk.com/video-212214673_456239058</div>
+        <div id="tooltip2" class="tooltip">https://wordwall.net/resource/73410373</div>
+		<div id="tooltip3" class="tooltip">https://wordwall.net/resource/73410784</div>
+		<div id="tooltip4" class="tooltip">https://wordwall.net/resource/73842520</div>
+		<div id="tooltip5" class="tooltip">https://vk.com/video-212214673_456239046</div>
+		<div id="tooltip6" class="tooltip">https://vk.com/video-212214673_456239052</div>
+		<div id="tooltip7" class="tooltip">https://wordwall.net/ru/resource/80269507</div>
+		<div id="tooltip8" class="tooltip">https://wordwall.net/ru/resource/80272824</div>
+		<div id="tooltip9" class="tooltip">https://wordwall.net/resource/80274529</div>
 
         <!-- Highlight area (will be updated dynamically by script) -->
         <div id="highlight1" class="highlight"></div>
@@ -70,12 +77,24 @@
     </div>
 
     <map name="image-map">
-        <area shape="circle" coords="210,374,30" href="https://vk.com/video-212214673_456239046" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 316, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="210,462,30" href="https://vk.com/video-212214673_456239052" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 178, 394, 30)" onmouseout="hideTooltip('tooltip2')">
-		<area shape="circle" coords="326,855,30" href="https://vk.com/video-212214673_456239058" target="_blank" alt="Area 2"
-            onmouseover="showTooltip(event, 'tooltip2', 274, 723, 30)" onmouseout="hideTooltip('tooltip2')">			
+        <area shape="circle" coords="162,103,65" href="https://vk.com/video-212214673_456239058" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip1', 162, 103, 65)" onmouseout="hideTooltip('tooltip1')">
+		<area shape="circle" coords="79,230,36" href="https://wordwall.net/resource/73410373" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip2', 79, 230, 36)" onmouseout="hideTooltip('tooltip2')">
+		<area shape="circle" coords="79,341,36" href="https://wordwall.net/resource/73410784" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip3', 79, 341, 36)" onmouseout="hideTooltip('tooltip3')">		
+		<area shape="circle" coords="79,447,36" href="https://wordwall.net/resource/73842520" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip4', 79, 447, 36)" onmouseout="hideTooltip('tooltip4')">		
+		<area shape="circle" coords="587,111,68" href="https://vk.com/video-212214673_456239046" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip5', 587, 111, 68)" onmouseout="hideTooltip('tooltip5')">
+		<area shape="circle" coords="1067,111,68" href="https://vk.com/video-212214673_456239052" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip6', 587, 111, 68)" onmouseout="hideTooltip('tooltip6')">	
+		<area shape="circle" coords="930,229,35" href="https://wordwall.net/ru/resource/80269507" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip7', 930, 229, 35)" onmouseout="hideTooltip('tooltip7')">	
+		<area shape="circle" coords="930,338,35" href="https://wordwall.net/ru/resource/80272824" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip8', 587, 111, 35)" onmouseout="hideTooltip('tooltip8')">	
+		<area shape="circle" coords="930,440,35" href="https://wordwall.net/resource/80274529" target="_blank" alt="Area 2"
+            onmouseover="showTooltip(event, 'tooltip9', 930, 440, 35)" onmouseout="hideTooltip('tooltip9')">	
 		
     </map>
 </div>
@@ -86,15 +105,15 @@
         tooltip.style.display = 'block';
         tooltip.style.left = event.pageX + 'px';
         tooltip.style.top = event.pageY + 'px';
-		tooltip.style.left = (x - 2* radius) + 'px';
-        tooltip.style.top = (y - 2* radius) + 'px';
+		tooltip.style.left = (x - 3 * radius)+ 'px';
+        tooltip.style.top = (y - 3* radius)+ 'px';
         
         // Update the highlight circle position and size
         const highlight = document.getElementById('highlight2');
-        highlight.style.left = (x - radius) + 'px';
-        highlight.style.top = (y - radius) + 'px';
-        highlight.style.width = (radius * 2) + 'px';
-        highlight.style.height = (radius * 2) + 'px';
+        highlight.style.left = (x - radius/1.18);
+        highlight.style.top = (y - radius/1.18);
+        highlight.style.width = (radius * 2);
+        highlight.style.height = (radius * 2);
     }
 
     function hideTooltip(tooltipId) {
